@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  --strong-cyan: hsl(172, 67%, 45%);
+  --very-dark-cyan: hsl(183, 100%, 15%);
+  --dark-grayish-cyan: hsl(186, 14%, 43%);
+  --dark-grayish-cyan2: hsl(184, 14%, 56%);
+  --light-grayish-cyan: hsl(185, 41%, 84%);
+  --light-grayish-cyan2: hsl(189, 41%, 97%);
+  --white: hsl(0, 0%, 100%);
+  --regular: 400;
+  --normal: 500;
+  --bold: 700;
+}
+
+body {
+  font-family: "Space Mono", monospace;
+  background-color: var(--light-grayish-cyan);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.logo {
+  margin-bottom: 1rem;
+  letter-spacing: 1rem;
+  color: var(--very-dark-cyan);
+}
+.calc-body {
+  height: 80vh;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 2rem;
+  padding: 3rem;
+}
+
+.input-box {
+  width: 31rem;
+  height: 35rem;
+  background: violet;
+}
+
+.bill-input::placeholder{
+  font-weight: bold;
+  font-size: 1.5rem;
+  overflow: visible;
+  vertical-align: top;
+  display: inline-block !important;
+  padding-left: 5px;
+  padding-top: 2px;
+  color: var(--dark-grayish-cyan);
+}
+
+.output-box {
+  width: 31rem;
+  height: 23rem;
+  background: yellow;
+  border-radius: 2rem;
+}
+
+
+
+
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
