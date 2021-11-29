@@ -52,7 +52,37 @@ body {
 .input-box {
   width: 31rem;
   height: 35rem;
-  background: violet;
+  /* background: violet; */
+  font-weight: var(--bold);
+  color: var(--dark-grayish-cyan);
+}
+
+
+.tip-percentage-container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.percentage-button {
+  padding: 0.7rem 0;
+  width: 10rem;
+  display: block;
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--white);
+  background-color: var(--very-dark-cyan);
+  font-weight: var(--bold);
+  font-family: "Space Mono" , monospace;
+  justify-self: center;
+}
+
+.percentage-input {
+  width: 10rem;
+  display: block;
+  padding: 0.5rem;
+  border: none;
 }
 
 .bill-input::placeholder{
