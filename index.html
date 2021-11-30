@@ -1,60 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <link rel="stylesheet" href="/style.css">
-  <title>Frontend Mentor | Tip calculator app</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Frontend Mentor | Tip calculator app</title>
+  </head>
+  <body>
+    <h1 class="logo">SPLITTER</h1>
+    <div class="calc-body">
+      
+      <div class="input-container">
+       
+        <div class="bill-input-wrapper">
+          <p class="lable">Bill</p>
+          <input class="input" type="text" placeholder="0" />
+        </div>
 
-</head>
-<body>
-<h1 class="logo">SPLITTER</h1>
- <div class="calc-body">
-  
-  <div class="input-box">
-   
-   
-    <div class="bill-input-wrapper">
-      <p class="bill-text">Bill</p>
-      <input class="input" type="text" placeholder="$">
-    </div>
-   
-   
-    <div class="tip-input-wrapper">
-      <p class="tip-text">Select tip %</p>
-      <div class="tip-percentage-container">
-        <button class="percentage-button">5%</button>
-        <button class="percentage-button">10%</button>
-        <button class="percentage-button">15%</button>
-        <button class="percentage-button">25%</button>
-        <button class="percentage-button">50%</button>
-        <input type="text" class="percentage-input" placeholder="Custom">
+        <div class="tip-input-wrapper">
+          <p class="lable">Select tip %</p>
+          <div class="tip-buttons-container">
+            <button class="tip-button">5%</button>
+            <button class="tip-button">10%</button>
+            <button class="tip-button">15%</button>
+            <button class="tip-button">25%</button>
+            <button class="tip-button">50%</button>
+            <input type="text" class="tip-input" placeholder="Custom" />
+          </div>
+        </div>
+
+        <div class="people-count-wrapper">
+          <p class="lable">Number of people</p>
+          <input class="input" type="text" placeholder="0" />
+        </div>
       </div>
-    </div>
-   
-  
-  <div class="people-count-wrapper">
-    <p class="bill-text">Number of people</p>
-    <input class="input" type="text" placeholder="&#61475;">
-  </div>
-  
-  
-  </div>
-   <div class="output-box">
+     
+    
+      <div class="output-container">
+      
+        <div class="tip-wrapper">
+          <div class="text">
+            <p>Tip Amount</p>
+            <span>/ person</span>
+          </div>
+          <div class="amount">
+            <p>$0.00</p>
+          </div>
+        </div>
 
-   </div>
- </div>
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  <!-- Bill
+        <div class="total-wrapper">
+          <div class="text">
+            <p>Total</p>
+            <span>/ person</span>
+          </div>
+          <div class="amount">
+            <p>$0.00</p>
+          </div>
+        </div>
+     <button class="reset-btn">RESET</button>
+      </div>
+     
+    </div>
+
+    <!-- Bill
 
   Select Tip %
   5%
@@ -77,6 +92,6 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>. 
   </div> -->
-  <script src="/app.js"></script>
-</body>
+    <script src="/app.js"></script>
+  </body>
 </html>
