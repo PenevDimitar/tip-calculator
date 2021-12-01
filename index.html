@@ -16,12 +16,15 @@
   <body>
     <h1 class="logo">SPLITTER</h1>
     <div class="calc-body">
-      
       <div class="input-container">
-       
         <div class="bill-input-wrapper">
           <p class="lable">Bill</p>
-          <input class="input" type="text" placeholder="0" />
+          <img
+            src="/images/icon-dollar.svg"
+            alt="dolar icon"
+            class="dolar-icon"
+          />
+          <input class="input bill-input" type="text" placeholder="0" />
         </div>
 
         <div class="tip-input-wrapper">
@@ -38,20 +41,24 @@
 
         <div class="people-count-wrapper">
           <p class="lable">Number of people</p>
-          <input class="input" type="text" placeholder="0" />
+          <p class="warning-message">Can`t be zero</p>
+          <input class="input people-count-input" type="text" placeholder="0" />
+          <img
+            src="/images/icon-person.svg"
+            alt="person icon"
+            class="person-icon"
+          />
         </div>
       </div>
-     
-    
+
       <div class="output-container">
-      
         <div class="tip-wrapper">
           <div class="text">
             <p>Tip Amount</p>
             <span>/ person</span>
           </div>
           <div class="amount">
-            <p>$0.00</p>
+            <p class="tip-amount">$0.00</p>
           </div>
         </div>
 
@@ -61,12 +68,11 @@
             <span>/ person</span>
           </div>
           <div class="amount">
-            <p>$0.00</p>
+            <p class="total-amount">$0.00</p>
           </div>
         </div>
-     <button class="reset-btn">RESET</button>
+        <button class="reset-button">RESET</button>
       </div>
-     
     </div>
 
     <!-- Bill

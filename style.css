@@ -96,9 +96,9 @@ body {
   cursor: pointer;
 }
 
-.tip-input:focus {
+/* .tip-input:focus {
   border: 1.5px solid var(--strong-cyan);
-}
+} */
 
 .lable {
   font-size: 1.5rem;
@@ -119,10 +119,46 @@ body {
   text-align: right;
   font-weight: var(--bold);
 }
-
-.input:focus {
+/* 
+.bill-input:focus {
   border: 1.5px solid var(--strong-cyan);
+} */
+/* 
+.people-count-input:focus {
+  border: 1.5px solid orange;
+} */
+
+.bill-input-wrapper {
+  position: relative;
 }
+.dolar-icon {
+  position: absolute;
+  top: 4.2rem;
+  left: 1rem;
+}
+
+.people-count-wrapper {
+  position: relative;
+}
+
+.warning-message {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: orange;
+  display: none;
+}
+
+
+.person-icon {
+  position: absolute;
+  top: 4.2rem;
+  left: 1rem;
+}
+
+
 
 .output-container {
   width: 100%;
@@ -160,7 +196,7 @@ body {
   color: var(--dark-grayish-cyan2);
 }
 
-.reset-btn {
+.reset-button {
   width: 100%;
   padding: 0.8rem 0rem;
   font-family: "Space Mono", monospace;
@@ -172,7 +208,7 @@ body {
   border-radius: 0.5rem;
 }
 
-.reset-btn:hover {
+.reset-button:hover {
   background-color: var(--light-grayish-cyan);
 }
 
@@ -196,7 +232,7 @@ body {
   .total-wrapper {
     margin-top: 5rem;
   }
-  .reset-btn {
+  .reset-button {
     margin-top: 8rem;
   }
 
