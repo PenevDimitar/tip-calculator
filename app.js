@@ -15,6 +15,9 @@ const calculator = {
   peopleCount: 0,
   calcTip(){
     return this.bill * this.tipPersent / this.peopleCount;
+  },
+  calcTotal(){
+    return (this.bill + (this.bill * this.tipPersent)) / this.peopleCount;
   }
 };
 
@@ -83,6 +86,7 @@ tipButtonsContainer.addEventListener("click", setTipPersentage);
 
 function setTipPersentage(e) {
   if (e.target.tagName === "BUTTON") {
+    console.log(e.target);
     tipInput.value = "";
     const currentBtn = e.target;
     tipButtons.forEach((button) => {
@@ -118,10 +122,31 @@ function displayResult(e) {
   if(result){
   calculator.peopleCount = result;  
   tipAmount.textContent = `$${calculator.calcTip().toFixed(2)}`
+  totalAmount.textContent = `$${calculator.calcTotal().toFixed(2)}`
   }
   
   
 }
+
+
+
+
+
+resetBtn.addEventListener("click", resetCalculator);
+
+// Resets calculator to initial state.
+function resetCalculator(e){
+  billInput.value = "";
+  tipButtons.forEach(button =>{
+    button.classList.remove("tip-button-clicked");
+  })
+  tipInput.value = "";
+  peopleCountInput.value = "";
+  tipAmount.textContent = "$0.00";
+  totalAmount.textContent = "$0.00";
+}
+
+
 
 // Verifycation functions :
 //- prevent users to enter negative numbers or letters.
@@ -151,6 +176,7 @@ function verifyPeopleCount(count) {
     peopleCountInput.style.border = "1.5px solid orange"
     peopleCountInput.value = "";
     tipAmount.textContent = '$0.00';
+    totalAmount.textContent = '$0.00';
     return 
   } else{
     warningMessage.style.display = "none";
