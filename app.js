@@ -1,139 +1,194 @@
+const inputContainer = document.querySelector(".input-container");
 const billInput = document.querySelector(".bill-input");
 const tipButtonsContainer = document.querySelector(".tip-buttons-container");
 const tipButtons = document.querySelectorAll(".tip-button");
 const tipInput = document.querySelector(".tip-input");
-const peopleCountInput = document.querySelector(".people-count-input");
+const peopleCountInput = document.querySelector(".people-input");
 const warningMessage = document.querySelector(".warning-message");
 const tipAmount = document.querySelector(".tip-amount");
 const totalAmount = document.querySelector(".total-amount");
 const resetBtn = document.querySelector(".reset-button");
 
-// Create the tip calculator as an object.
-
-// calcTip function:
-// - Divides the total bill by the number of people.
-// - As a result, it returns the amount of the tip owed by each person
-// - fixed to the second digit after decimal point.
-
-//calcTotal function:
-// - Calculates and adds the total amount of the tip to the bill.
-// - returns the total bill amount owed by each person
-// - fixed to the second digit after decimal point.
-
-const tipCalculator = {
+const calculator = {
   bill: 0,
-  tipPersentage: 0,
-  numberOfPeople: 0,
-
-  calcTip() {
-    const tipPerPerson =
-      (this.bill * (this.tipPersentage / 100)) / this.numberOfPeople;
-    return tipPerPerson.toFixed(2);
+  tipPersent: 0,
+  peopleCount: 0,
+  calcTip(){
+    return this.bill * this.tipPersent / this.peopleCount;
   },
-
-  calcTotal() {
-    const totalBillPerPerson =
-      (this.bill + this.calcTip() * this.numberOfPeople) / this.numberOfPeople;
-    return totalBillPerPerson.toFixed(2);
-  },
+  calcTotal(){
+    return (this.bill + (this.bill * this.tipPersent)) / this.peopleCount;
+  }
 };
 
-//- On focus add border on bill input field.
-//-- obtain the value of bill input field on blur.
+// Using event delegetaion to:
+//-add some styles when input fields are focused.
+inputContainer.addEventListener("focusin", addBorders);
 
-billInput.addEventListener("focus", (e) => {
-  e.target.style.border = "1.5px solid cyan";
-});
-
-billInput.addEventListener("blur", (e) => {
-  const currentBill = e.target.value;
-  const isNan = isNaN(currentBill);
-  if (!isNan && currentBill != "") {
-    tipCalculator.bill = Number(currentBill);
-  } else {
-    tipCalculator.bill = 0;
+function addBorders(e) {
+  if (e.target.tagName === "INPUT") {
+    let input = e.target;
+    switch (input) {
+      case billInput:
+      case tipInput:
+        input.style.border = "1.5px solid cyan";
+        input.style.transition = "border 1s ease";
+        break;
+      case peopleCountInput:
+        input.style.border = "1.5px solid orange";
+        input.style.transition = "border 1s ease";
+        warningMessage.style.display = "block";
+        break;
+      default:
+        "ERROR!";
+    }
   }
-  e.target.style.border = "";
-});
-
-//- add 'click' event listener to tip bittons container.
-//-- use event delegation to determine what will be the tip persetnage.
-//--- reset styles for all buttons
-//--- set style for active state on clicked button
-//--- obtain persentage value on blur.
-tipButtonsContainer.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") {
-    const clickedButton = e.target;
-    let currentTipPersentage = 0;
-    resetButtonStyle(tipButtons);
-    resetInputStyle(tipInput);
-    clickedButton.style.background = "hsl(172, 67%, 45%)";
-    clickedButton.style.color = "hsl(183, 100%, 15%)";
-    currentTipPersentage = clickedButton.textContent.slice(
-      0,
-      clickedButton.textContent.length - 1
-    );
-    tipCalculator.tipPersentage = Number(currentTipPersentage);
-  }
-});
-
-//- On focus add border on tip input field.
-//-- obtain the persetage value of tip input field on blur.
-tipInput.addEventListener("focus", (e) => {
-  e.target.style.border = "1.5px solid cyan";
-  resetButtonStyle(tipButtons);
-});
-
-tipInput.addEventListener("blur", (e) => {
-  const persentageFromInput = e.target.value;
-  const isNan = isNaN(persentageFromInput);
-  if (!isNan && persentageFromInput != "") {
-    tipCalculator.tipPersentage = Number(persentageFromInput);
-  } else {
-    tipCalculator.tipPersentage = 0;
-  }
-});
-
-//- On focus add border on  people count input field.
-//- reveal warning message
-// -- on blur obtain people count
-// -- dispaly results
-peopleCountInput.addEventListener("focus", (e) => {
-  e.target.style.border = "1.5px solid orange";
-  warningMessage.style.display = "block";
-});
-
-peopleCountInput.addEventListener("blur", (e) => {
-  const peopleCount = e.target.value;
-  const isNan = isNaN(peopleCount);
-  if (!isNan && peopleCount != "") {
-    tipCalculator.numberOfPeople = Number(peopleCount);
-    tipAmount.textContent = `$${tipCalculator.calcTip()}`;
-    totalAmount.textContent = `$${tipCalculator.calcTotal()}`;
-    peopleCountInput.style.border = "1.5px solid rgba(0, 0, 0, 0)";
-    warningMessage.style.display = "none";
-  }
-});
-
-// on click reset all styles and input values.
-resetBtn.addEventListener("click", (e) => {
-  billInput.value = "";
-  warningMessage.style.display = "none";
-  resetButtonStyle(tipButtons);
-  resetInputStyle(tipInput);
-  resetInputStyle(peopleCountInput);
-  totalAmount.textContent = "$0.00";
-  tipAmount.textContent = "$0.00";
-});
-
-function resetButtonStyle(array) {
-  array.forEach((element) => {
-    element.style.background = "hsl(183, 100%, 15%)";
-    element.style.color = "hsl(0, 0%, 100%)";
-  });
 }
 
-function resetInputStyle(input) {
-  input.style.border = "1.5px solid rgba(0, 0, 0, 0)";
-  input.value = "";
+// Using event delegation to :
+//- verify data and remove styles when input fields are losing focus.
+// -- set values to calculator if they are correct.
+inputContainer.addEventListener("focusout", verifyDataRemoveBorders);
+
+function verifyDataRemoveBorders(e) {
+  if (e.target.tagName === "INPUT") {
+    let input = e.target;
+    let inputValue = e.target.value;
+
+    switch (input) {
+      case billInput:
+        calculator.bill = verifyBillValue(inputValue);
+        input.style.border = "1.5px solid rgba(0,0,0,0)";
+        break;
+      case tipInput:
+        calculator.tipPersent = verifyTipValue(inputValue);
+        input.style.border = "1.5px solid rgba(0,0,0,0)";
+        console.log(calculator.tipPersent);
+        break;
+      case peopleCountInput:
+        input.style.border = "1.5px solid rgba(0,0,0,0)";
+        warningMessage.style.display = "none";
+        break;
+      default:
+        "ERROR!";
+    }
+  }
+}
+
+// Using event delegation to:
+//- Remove value from custom input.
+//- add styles on buttons when they are clicked.
+//-- if clicked element is not a button reset all button styles to initial.
+//-- determin persentage value depending on which button is clicked.
+//--- set obtained value to calculator.
+
+tipButtonsContainer.addEventListener("click", setTipPersentage);
+
+function setTipPersentage(e) {
+  if (e.target.tagName === "BUTTON") {
+    console.log(e.target);
+    tipInput.value = "";
+    const currentBtn = e.target;
+    tipButtons.forEach((button) => {
+      if (currentBtn === button) {
+        currentBtn.classList.add("tip-button-clicked");
+      } else {
+        button.classList.remove("tip-button-clicked");
+      }
+    });
+    calculator.tipPersent = obtainPersentFromButton(currentBtn);
+  } else {
+    const foundBtn = Array.from(tipButtons).find((button) =>
+      button.classList.contains("tip-button-clicked")
+    );
+    if (foundBtn) {
+      foundBtn.classList.remove("tip-button-clicked");
+    }
+  }
+}
+
+// Using input event to:
+//- verify user input data
+//-- set peopleCount value to calculator
+//--- calculate result
+//---- display result in output fields.
+
+peopleCountInput.addEventListener("input", displayResult);
+
+function displayResult(e) {
+  let count = e.target.value;
+  let result = verifyPeopleCount(count);
+  
+  if(result){
+  calculator.peopleCount = result;  
+  tipAmount.textContent = `$${calculator.calcTip().toFixed(2)}`
+  totalAmount.textContent = `$${calculator.calcTotal().toFixed(2)}`
+  }
+  
+  
+}
+
+
+
+
+
+resetBtn.addEventListener("click", resetCalculator);
+
+// Resets calculator to initial state.
+function resetCalculator(e){
+  billInput.value = "";
+  tipButtons.forEach(button =>{
+    button.classList.remove("tip-button-clicked");
+  })
+  tipInput.value = "";
+  peopleCountInput.value = "";
+  tipAmount.textContent = "$0.00";
+  totalAmount.textContent = "$0.00";
+}
+
+
+
+// Verifycation functions :
+//- prevent users to enter negative numbers or letters.
+function verifyBillValue(bill) {
+  if (isNaN(bill) || !bill) {
+    billInput.value = "";
+  } else if (bill < 0) {
+    bill = Math.abs(bill);
+    billInput.value = bill;
+  }
+  return Number(bill);
+}
+
+function verifyTipValue(tip) {
+  if (isNaN(tip) || !tip) {
+    tipInput.value = "";
+  } else if (tip < 0) {
+    tip = Math.abs(tip);
+    tipInput.value = tip;
+  }
+  return Number(tip / 100);
+}
+
+function verifyPeopleCount(count) {
+  if (isNaN(count) || count == "" || count == 0) {
+    warningMessage.style.display = "block";
+    peopleCountInput.style.border = "1.5px solid orange"
+    peopleCountInput.value = "";
+    tipAmount.textContent = '$0.00';
+    totalAmount.textContent = '$0.00';
+    return 
+  } else{
+    warningMessage.style.display = "none";
+    peopleCountInput.style.border = "1.5px solid rgba(0,0,0,0)"
+    return Number(count);
+  }
+}
+
+
+// Removes the %-sign from button textContent.
+// returns value to be set as tipPersentage in calculator.
+function obtainPersentFromButton(button) {
+  let persent = button.textContent;
+  return Number(persent.slice(0, persent.length - 1) / 100);
 }
